@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C069B2E204E6ED400524617 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0C069B2D204E6ED400524617 /* README.md */; };
 		0CD73960204E5C4E0085F5F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD7395F204E5C4E0085F5F8 /* AppDelegate.swift */; };
 		0CD73962204E5C4E0085F5F8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD73961204E5C4E0085F5F8 /* ViewController.swift */; };
 		0CD73965204E5C4E0085F5F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD73963204E5C4E0085F5F8 /* Main.storyboard */; };
 		0CD73967204E5C4E0085F5F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CD73966204E5C4E0085F5F8 /* Assets.xcassets */; };
 		0CD7396A204E5C4E0085F5F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CD73968204E5C4E0085F5F8 /* LaunchScreen.storyboard */; };
 		0CD73973204E5CA80085F5F8 /* PKFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD73972204E5CA80085F5F8 /* PKFloatingButton.swift */; };
-		0CD73975204E5EFB0085F5F8 /* PKGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD73974204E5EFB0085F5F8 /* PKGlobals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C069B2D204E6ED400524617 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		0CD7395C204E5C4E0085F5F8 /* PKFloatingButtonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKFloatingButtonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CD7395F204E5C4E0085F5F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CD73961204E5C4E0085F5F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +26,6 @@
 		0CD73969204E5C4E0085F5F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CD7396B204E5C4E0085F5F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CD73972204E5CA80085F5F8 /* PKFloatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKFloatingButton.swift; sourceTree = "<group>"; };
-		0CD73974204E5EFB0085F5F8 /* PKGlobals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PKGlobals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +58,7 @@
 		0CD7395E204E5C4E0085F5F8 /* PKFloatingButtonDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0C069B2D204E6ED400524617 /* README.md */,
 				0CD73971204E5CA80085F5F8 /* PKFloatingButton */,
 				0CD7395F204E5C4E0085F5F8 /* AppDelegate.swift */,
 				0CD73961204E5C4E0085F5F8 /* ViewController.swift */,
@@ -73,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				0CD73972204E5CA80085F5F8 /* PKFloatingButton.swift */,
-				0CD73974204E5EFB0085F5F8 /* PKGlobals.swift */,
 			);
 			path = PKFloatingButton;
 			sourceTree = "<group>";
@@ -139,6 +139,7 @@
 			files = (
 				0CD7396A204E5C4E0085F5F8 /* LaunchScreen.storyboard in Resources */,
 				0CD73967204E5C4E0085F5F8 /* Assets.xcassets in Resources */,
+				0C069B2E204E6ED400524617 /* README.md in Resources */,
 				0CD73965204E5C4E0085F5F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,7 +152,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CD73962204E5C4E0085F5F8 /* ViewController.swift in Sources */,
-				0CD73975204E5EFB0085F5F8 /* PKGlobals.swift in Sources */,
 				0CD73960204E5C4E0085F5F8 /* AppDelegate.swift in Sources */,
 				0CD73973204E5CA80085F5F8 /* PKFloatingButton.swift in Sources */,
 			);
@@ -294,7 +294,7 @@
 				DEVELOPMENT_TEAM = VBGAMJT4HG;
 				INFOPLIST_FILE = PKFloatingButtonDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.veme.veme;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.PKFloatingButtonDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9c4ee453-0361-4434-a057-3d2bfb3e293f";
 				PROVISIONING_PROFILE_SPECIFIER = Veme_Create_develop;
@@ -311,7 +311,7 @@
 				DEVELOPMENT_TEAM = VBGAMJT4HG;
 				INFOPLIST_FILE = PKFloatingButtonDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.veme.veme;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.PKFloatingButtonDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9c4ee453-0361-4434-a057-3d2bfb3e293f";
 				PROVISIONING_PROFILE_SPECIFIER = Veme_Create_develop;

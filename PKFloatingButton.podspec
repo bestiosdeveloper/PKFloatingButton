@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PKFloatingButton'
-  s.version          = ‘0.1.1’
+  s.version          = ‘0.1.2’
   s.summary          = 'Create a floating button in whole application.'
  
   s.description      = <<-DESC

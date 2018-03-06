@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PKFloatingButton'
-  s.version          = '0.1.0'
+  s.version          = ‘0.1.1’
   s.summary          = 'Create a floating button in whole application.'
  
   s.description      = <<-DESC
@@ -14,5 +14,5 @@ This framework will help you to create a Floating button that will float over th
  
   s.ios.deployment_target = '10.0'
   s.source_files = 'PKFloatingButtonDemo/PKFloatingButton/*.swift'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
+ s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4' }
 end

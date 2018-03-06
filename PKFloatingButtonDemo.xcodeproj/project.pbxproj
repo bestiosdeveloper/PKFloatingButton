@@ -294,7 +294,7 @@
 				DEVELOPMENT_TEAM = VBGAMJT4HG;
 				INFOPLIST_FILE = PKFloatingButtonDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.PKFloatingButtonDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.veme.veme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9c4ee453-0361-4434-a057-3d2bfb3e293f";
 				PROVISIONING_PROFILE_SPECIFIER = Veme_Create_develop;
@@ -311,7 +311,7 @@
 				DEVELOPMENT_TEAM = VBGAMJT4HG;
 				INFOPLIST_FILE = PKFloatingButtonDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.app.PKFloatingButtonDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.veme.veme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9c4ee453-0361-4434-a057-3d2bfb3e293f";
 				PROVISIONING_PROFILE_SPECIFIER = Veme_Create_develop;

@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-        PKFloatingButton.shared.enableFloating(onView: nil, viewToExpand: nil, withImage: #imageLiteral(resourceName: "help_white"), onTapHandler: nil)
+        PKFloatingButton.shared.enableFloating(onView: self.view, viewToExpand: nil, withImage: #imageLiteral(resourceName: "help_white"), onTapHandler: nil)
     }
 }
 

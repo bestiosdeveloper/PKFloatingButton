@@ -20,8 +20,6 @@ class PKFloatingButton {
     
     //MARK:- Private Properties
     //MARK:-
-    let appdelegate = (UIApplication.shared.delegate as! AppDelegate)
-    
     fileprivate static let floatButtonBackgroundColor: UIColor = UIColor.darkGray//UIColor(red: 88/255.0, green: 194/255.0, blue: 217/255.0, alpha: 1.0)
     
     fileprivate var faddingTimer: Timer?
@@ -204,17 +202,12 @@ class PKFloatingButton {
     
     //MARK:- Public Methods
     //MARK:-
-    func enableFloating(onView: UIView? = nil, viewToExpand: UIView? = nil, withImage: UIImage? = nil, onTapHandler: (()->())? = nil) {
+    func enableFloating(onView: UIView, viewToExpand: UIView? = nil, withImage: UIImage? = nil, onTapHandler: (()->())? = nil) {
         self.floatingButtonTapHandler = onTapHandler
         //add floating button on the desired screen
-        if let view = onView {
-            self.buttonFloatingOn = view
-            view.addSubview(self.floatButton)
-        }
-        else {
-            self.buttonFloatingOn = appdelegate.window
-            appdelegate.window?.addSubview(self.floatButton)
-        }
+        self.buttonFloatingOn = onView
+        onView.addSubview(self.floatButton)
+
         self.initFloatButton(viewToExpand: viewToExpand, withImage: UIImage(named: "help_white"))
     }
     

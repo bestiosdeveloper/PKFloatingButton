@@ -1,12 +1,12 @@
-# PKImageSpark
+# PKFloatingButton
 
-[![CocoaPods](https://img.shields.io/cocoapods/p/FaveButton.svg)](https://cocoapods.org/pods/PKImageSpark)
-[![codebeat badge](https://codebeat.co/badges/580517f8-efc8-4d20-89aa-900531610144)](https://codebeat.co/projects/github-com-kumarpramod017-pkimagespark-master)
+[![CocoaPods](https://img.shields.io/cocoapods/p/FaveButton.svg)](https://cocoapods.org/pods/PKFloatingButton)
+[![codebeat badge](https://codebeat.co/badges/580517f8-efc8-4d20-89aa-900531610144)](https://codebeat.co/projects/github-com-kumarpramod017-pkfloatingbutton-master)
 
-Some Cool Animations  written in Swift
+Floating button that will float over the window or specified view
 
 
-![preview](https://github.com/kumarpramod017/PKImageSpark/blob/master/PKImageSparkDemo/demo.gif)
+![preview](https://github.com/kumarpramod017/PKFloatingButton/blob/master/PKFloatingButton.gif)
 
 
 ## Requirements
@@ -21,33 +21,35 @@ For manual instalation, drag Source folder into your project.
 os use [CocoaPod](https://cocoapods.org) adding this line to you `Podfile`:
 
 ```ruby
-pod 'PKImageSpark'
+pod 'PKFloatingButton'
 ```
 
 ## Usage
 
-#### In Code
+#### For Enable Floating
 
-1) Create a instance of  `PKImageSpark` with customised of default configurations and pass an `UIImage` that will spark
-
-2) Just call `startSparking()` method for animation
+1) Just call `enableFloating()` method with `shared` instance of `PKFloatingButton`
 
 Example:
 
 ```swift
-let confg = PKSparkConfiguration()
-confg.sparkOnView = self.view
-confg.sparkGenerationView = self.clickButton
-confg.totalNumberOfSparkImages = 15
-confg.sparkAnimation = .bubbleToUpSide
+PKFloatingButton.shared.enableFloating(onView: self.view, viewToExpand: nil, withImage: #imageLiteral(resourceName: "help_white"), onTapHandler: nil)
+```
 
-let sparkAnimation = PKImageSpark(withImage: #imageLiteral(resourceName: "ic_love"), configuration: confg)
-sparkAnimation.startSparking()
+
+#### For Disable Floating
+
+1) Just call `disableFloating()` method with `shared` instance of `PKFloatingButton`
+
+Example:
+
+```swift
+PKFloatingButton.shared.disableFloating()
 ```
 
 ## Licence
 
-PKImageSpark is released under the MIT license.
+PKFloatingButton is released under the MIT license.
 
 
 

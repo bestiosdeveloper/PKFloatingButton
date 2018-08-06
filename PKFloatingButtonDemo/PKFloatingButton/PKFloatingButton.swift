@@ -12,26 +12,21 @@ import UIKit
  ************* PFFloatingButton Class *************
  **************************************************/
 
-class PKFloatingButton {
+public class PKFloatingButton {
     
     //MARK:- Public Properties
     //MARK:-
-    static let shared: PKFloatingButton = PKFloatingButton()
+    public static let shared = PKFloatingButton()
     
     //MARK:- Private Properties
     //MARK:-
-    fileprivate static let floatButtonBackgroundColor: UIColor = UIColor.darkGray//UIColor(red: 88/255.0, green: 194/255.0, blue: 217/255.0, alpha: 1.0)
     
     fileprivate var faddingTimer: Timer?
     
-    fileprivate let floatButton: UIButton = UIButton()
+    let floatButton: UIButton = UIButton()
     
-    fileprivate var floatButtonSize: CGSize = CGSize(width: 60.0, height: 60.0)
-    fileprivate var makeButtonFadeInSecondsAfterTap: TimeInterval = 1.0
     fileprivate var buttonFloatingOn: UIView?
     fileprivate var viewToExpand: PKExpandableView = PKExpandableView()
-    fileprivate var padding: CGFloat = 3.0
-    fileprivate var cornerRadius: CGFloat = 10.0
     
     fileprivate var floatingButtonTapHandler: (()->())?
     
@@ -40,22 +35,22 @@ class PKFloatingButton {
     //MARK:- Private Methods
     //MARK:-
     private init() {
-        //        self.lastPosition = CGPoint(x: self.floatButtonSize.width / 2.0, y: (self.buttonFloatingOn?.frame.size.height ?? 0.0) / 2.0)
+        //        self.lastPosition = CGPoint(x: PKFloatingButtonConfiguration.shared.buttonSize.width / 2.0, y: (self.buttonFloatingOn?.frame.size.height ?? 0.0) / 2.0)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented in file \(#file) on line \(#line)")
     }
     
     fileprivate func initFloatButton(viewToExpand: UIView? = nil, withImage: UIImage? = nil) {
         
         //give the initial frame for loating button
-        self.floatButton.frame = CGRect(x: self.lastPosition.x, y: self.lastPosition.y, width: self.floatButtonSize.width, height: self.floatButtonSize.height)
+        self.floatButton.frame = CGRect(x: self.lastPosition.x, y: self.lastPosition.y, width: PKFloatingButtonConfiguration.shared.buttonSize.width, height: PKFloatingButtonConfiguration.shared.buttonSize.height)
         
         //bueatify the bloating button
-        self.floatButton.layer.cornerRadius = self.cornerRadius
+        self.floatButton.layer.cornerRadius = PKFloatingButtonConfiguration.shared.cornerRadius
         self.floatButton.layer.masksToBounds = true
-        self.floatButton.backgroundColor = PKFloatingButton.floatButtonBackgroundColor
+        self.floatButton.backgroundColor = PKFloatingButtonConfiguration.shared.backgroundColor
         
         //set given image to floating button
         self.floatButton.setImage(withImage, for: UIControlState.normal)
@@ -69,7 +64,7 @@ class PKFloatingButton {
         
         //        //set default position of floating button
         if self.lastPosition.x == 0.0 {
-            self.lastPosition = CGPoint(x: self.floatButtonSize.width / 2.0, y: (self.buttonFloatingOn?.frame.size.height ?? self.floatButtonSize.width) / 2.0)
+            self.lastPosition = CGPoint(x: PKFloatingButtonConfiguration.shared.buttonSize.width / 2.0, y: (self.buttonFloatingOn?.frame.size.height ?? PKFloatingButtonConfiguration.shared.buttonSize.width) / 2.0)
         }
         self.floatButton.center = self.lastPosition
         
@@ -82,12 +77,12 @@ class PKFloatingButton {
         self.shouldButtonFade(isFade: true, animated: false)
     }
     
-    fileprivate func shouldButtonFade(isFade: Bool, animated: Bool) {
+    func shouldButtonFade(isFade: Bool, animated: Bool) {
         
         //make floating button fade in/out with animation
-        UIView.animate(withDuration: animated ? 0.5 : 0.0, animations: {
+        UIView.animate(withDuration: animated ? PKFloatingButtonConfiguration.shared.fadeInAlpha : 0.0, animations: {
             
-            self.floatButton.alpha = isFade ? 0.5 : 1.0
+            self.floatButton.alpha = CGFloat(isFade ? PKFloatingButtonConfiguration.shared.fadeInAlpha : 1.0)
             
         }) { (completed) in
             if !isFade {
@@ -97,13 +92,13 @@ class PKFloatingButton {
         }
     }
     
-    fileprivate func startTimer() {
+    func startTimer() {
         //start the fadding timer
         self.stopTimer()
-        self.faddingTimer = Timer.scheduledTimer(timeInterval: self.makeButtonFadeInSecondsAfterTap, target: self, selector: #selector(PKFloatingButton.timerHandler(_:)), userInfo: nil, repeats: true)
+        self.faddingTimer = Timer.scheduledTimer(timeInterval: PKFloatingButtonConfiguration.shared.fadeInSeconds, target: self, selector: #selector(PKFloatingButton.timerHandler(_:)), userInfo: nil, repeats: true)
     }
     
-    fileprivate func stopTimer() {
+    func stopTimer() {
         //invalidate the timer
         self.faddingTimer?.invalidate()
         self.faddingTimer = nil
@@ -123,10 +118,12 @@ class PKFloatingButton {
             handler()
         }
         
-        //expand the view to be shown
-        self.viewToExpand.expand(floatButton: self.floatButton)
-        //stop timer if executing
-        self.stopTimer()
+        if PKFloatingButtonConfiguration.shared.isExpandable {
+            //expand the view to be shown
+            self.viewToExpand.expand(floatButton: self.floatButton)
+            //stop timer if executing
+            self.stopTimer()
+        }
     }
     
     @objc private func panHandler(_ gesture: UIPanGestureRecognizer) {
@@ -136,9 +133,9 @@ class PKFloatingButton {
         
         if let gestureView = gesture.view, let floatSuperView = self.buttonFloatingOn {
             
-            let topLimit: CGFloat = (self.floatButtonSize.height / 2.0) + self.padding
+            let topLimit: CGFloat = (PKFloatingButtonConfiguration.shared.buttonSize.height / 2.0) + PKFloatingButtonConfiguration.shared.padding
             let bottomLimit: CGFloat = (floatSuperView.frame.size.height - topLimit)
-            let leftLimit: CGFloat = ((self.floatButtonSize.width / 2.0) + self.padding)
+            let leftLimit: CGFloat = ((PKFloatingButtonConfiguration.shared.buttonSize.width / 2.0) + PKFloatingButtonConfiguration.shared.padding)
             let rightLimit: CGFloat = (floatSuperView.frame.size.width - leftLimit)
             
             let translation  = gesture.translation(in: gestureView)
@@ -167,7 +164,7 @@ class PKFloatingButton {
                     //x shouldn't cross the boundaries limits
                     adjustXForTopAndBottmAlignement()
                 }
-                //for bottom alignment
+                    //for bottom alignment
                 else if (0...(floatSuperView.frame.size.width) ~= newX), (newY >  ((floatSuperView.frame.size.height / 5.0) * 4.0)) {
                     //y make it to bottom aligned
                     newY = bottomLimit
@@ -175,12 +172,12 @@ class PKFloatingButton {
                     //x shouldn't cross the boundaries limits
                     adjustXForTopAndBottmAlignement()
                 }
-                //for all other cases
+                    //for all other cases
                 else {
-                    if (self.floatButtonSize.height * 2.0) > newY {
+                    if (PKFloatingButtonConfiguration.shared.buttonSize.height * 2.0) > newY {
                         newY = topLimit
                     }
-                    else if newY > (floatSuperView.frame.size.height - (self.floatButtonSize.height * 2.0)) {
+                    else if newY > (floatSuperView.frame.size.height - (PKFloatingButtonConfiguration.shared.buttonSize.height * 2.0)) {
                         newY = bottomLimit
                     }
                     
@@ -202,138 +199,16 @@ class PKFloatingButton {
     
     //MARK:- Public Methods
     //MARK:-
-    func enableFloating(onView: UIView, viewToExpand: UIView? = nil, withImage: UIImage? = nil, onTapHandler: (()->())? = nil) {
+    public func enableFloating(onView: UIView, viewToExpand: UIView? = nil, withImage: UIImage? = nil, onTapHandler: (()->())? = nil) {
         self.floatingButtonTapHandler = onTapHandler
         //add floating button on the desired screen
         self.buttonFloatingOn = onView
         onView.addSubview(self.floatButton)
-
-        self.initFloatButton(viewToExpand: viewToExpand, withImage: UIImage(named: "help_white"))
+        
+        self.initFloatButton(viewToExpand: viewToExpand, withImage: withImage)
     }
     
-    func disableFloating() {
+    public func disableFloating() {
         self.floatButton.removeFromSuperview()
     }
 }
-
-
-
-/**************************************************
- ************* PKExpandableView Class *************
- **************************************************/
-fileprivate class PKExpandableView: UIView {
-    
-    //MARK:- Enum to choose the expanding type
-    //MARK:-
-    enum ExpandAccordingTo {
-        case Square, Screen
-    }
-    
-    
-    //MARK:- Private Properties
-    //MARK:-
-    fileprivate var expandingAs = ExpandAccordingTo.Square
-    fileprivate var minExpandFrame = CGRect.zero, maxExpandFrame = CGRect.zero
-    fileprivate var contentInsets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-    
-    
-    //MARK:- Private Properties
-    //MARK:-
-    var expandingView: UIView?// = UIView()
-    
-    
-    //MARK:- Life Cycle Methods
-    //MARK:-
-    convenience init() {
-        self.init(frame: CGRect.zero, expandMinFrame: CGRect.zero)
-    }
-    
-    init(frame: CGRect, expandMinFrame: CGRect, viewToExpand: UIView? = nil) {
-        super.init(frame: frame)
-        
-        self.minExpandFrame = expandMinFrame
-        
-        //get the ration for expanding according to the expanding choice
-        var ratio: CGFloat = 1.0
-        if self.expandingAs == ExpandAccordingTo.Square {
-            ratio = 1.0
-        }
-        else {
-            ratio = self.frame.size.width / self.frame.size.height
-        }
-        
-        let newWidth = self.frame.size.width - (self.contentInsets.left + self.contentInsets.right)
-        let newHeight = newWidth / ratio
-        
-        //calculate and store the max size to expande
-        self.maxExpandFrame = CGRect(x: self.contentInsets.left, y: self.contentInsets.top, width: newWidth, height: newHeight)
-        
-        //add expanding view if passed
-        if let expView = viewToExpand {
-            self.expandingView = expView
-            expView.center = self.center
-        }
-        else {
-            self.expandingView = UIView(frame: expandMinFrame)
-        }
-        
-        self.expandingView!.alpha = 0.8
-        self.expandingView!.backgroundColor = PKFloatingButton.floatButtonBackgroundColor
-        self.expandingView!.layer.cornerRadius = 10.0//PKFloatingButton.shared.cornerRadius
-        self.expandingView!.layer.masksToBounds = true
-        self.expandingView!.autoresizesSubviews = true
-        
-        //add expanding view on main view
-        self.addSubview(self.expandingView!)
-        self.isHidden = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented in file \(#file) on line \(#line)")
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        //collape the expanded view on touch event
-        self.collapse()
-    }
-    
-    //MARK:- Public Methods
-    //MARK:-
-    func expand(floatButton: UIButton) {
-        
-        //unhide self to enable touch event
-        self.isHidden = false
-        
-        //hide the floating button
-        floatButton.isHidden = true
-        
-        //make expanding view as the button size
-        self.minExpandFrame = floatButton.frame
-        self.expandingView?.frame = floatButton.frame
-        
-        //expand with the animation
-        UIView.animate(withDuration: 0.3, animations: {
-            self.expandingView?.frame = self.maxExpandFrame
-            self.expandingView?.center = self.center
-        })
-    }
-    
-    func collapse() {
-        
-        //start the timer for fadding the floating button
-        PKFloatingButton.shared.shouldButtonFade(isFade: false, animated: false)
-        PKFloatingButton.shared.startTimer()
-        
-        //collape the expanded view with animation
-        UIView.animate(withDuration: 0.3, animations: {
-            self.expandingView?.frame = self.minExpandFrame
-        }, completion: { (sucess) in
-            //show the floating button
-            PKFloatingButton.shared.floatButton.isHidden = false
-            //hide expanded view
-            self.isHidden = true
-        })
-    }
-}
-
